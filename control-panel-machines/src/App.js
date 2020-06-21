@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { makeStyles } from "@material-ui/core/styles";
 
 import Icon from "@material-ui/core/Icon";
 import Store from "@material-ui/icons/Store";
@@ -13,21 +14,26 @@ import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
 
 
-import Table from "components/Table/Table.js";
-import CustomTabs from "components/CustomTabs/CustomTabs.js";
-import Tasks from "components/Tasks/Tasks.js";
-import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardIcon from "components/Card/CardIcon.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
-import Danger from "components/Typography/Danger.js";
+import Table from "./components/Table/Table.js";
+import CustomTabs from "./components/CustomTabs/CustomTabs.js";
+import Tasks from "./components/Tasks/Tasks.js";
+import GridItem from "./components/Grid/GridItem.js";
+import GridContainer from "./components/Grid/GridContainer.js";
+import Card from "./components/Card/Card.js";
+import CardHeader from "./components/Card/CardHeader.js";
+import CardIcon from "./components/Card/CardIcon.js";
+import CardBody from "./components/Card/CardBody.js";
+import CardFooter from "./components/Card/CardFooter.js";
+import Danger from "./components/Typography/Danger.js";
 
-import { bugs, website, server } from "variables/general.js";
+import { bugs, website, server } from "./variables/general.js";
+
+import styles from "./assets/jss/material-dashboard-react/views/dashboardStyle.js";
+
+const useStyles = makeStyles(styles);
 
 function App() {
+  const classes = useStyles();
   return (
     <div>
       <GridContainer>
@@ -37,13 +43,13 @@ function App() {
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
               </CardIcon>
-              <p className={"cardCategory"}>Used Space</p>
-              <h3 className={"cardTitle"}>
+              <p className={classes.cardCategory}>Used Space</p>
+              <h3 className={classes.cardTitle}>
                 49/50 <small>GB</small>
               </h3>
             </CardHeader>
             <CardFooter stats>
-              <div className={"stats"}>
+              <div className={classes.stats}>
                 <Danger>
                   <Warning />
                 </Danger>
@@ -60,11 +66,11 @@ function App() {
               <CardIcon color="success">
                 <Store />
               </CardIcon>
-              <p className={"cardCategory"}>Revenue</p>
-              <h3 className={"cardTitle"}>$34,245</h3>
+              <p className={classes.cardCategory}>Revenue</p>
+              <h3 className={classes.cardTitle}>$34,245</h3>
             </CardHeader>
             <CardFooter stats>
-              <div className={"stats"}>
+              <div className={classes.stats}>
                 <DateRange />
                 Last 24 Hours
               </div>
@@ -77,11 +83,11 @@ function App() {
               <CardIcon color="danger">
                 <Icon>info_outline</Icon>
               </CardIcon>
-              <p className={"cardCategory"}>Fixed Issues</p>
-              <h3 className={"cardTitle"}>75</h3>
+              <p className={classes.cardCategory}>Fixed Issues</p>
+              <h3 className={classes.cardTitle}>75</h3>
             </CardHeader>
             <CardFooter stats>
-              <div className={"stats"}>
+              <div className={classes.stats}>
                 <LocalOffer />
                 Tracked from Github
               </div>
@@ -94,11 +100,11 @@ function App() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={"cardCategory"}>Followers</p>
-              <h3 className={"cardTitle"}>+245</h3>
+              <p className={classes.cardCategory}>Followers</p>
+              <h3 className={classes.cardTitle}>+245</h3>
             </CardHeader>
             <CardFooter stats>
-              <div className={"stats"}>
+              <div className={classes.stats}>
                 <Update />
                 Just Updated
               </div>
@@ -113,11 +119,11 @@ function App() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={"cardCategory"}>Followers</p>
-              <h3 className={"cardTitle"}>+245</h3>
+              <p className={classes.cardCategory}>Followers</p>
+              <h3 className={classes.cardTitle}>+245</h3>
             </CardHeader>
             <CardFooter stats>
-              <div className={"stats"}>
+              <div className={classes.stats}>
                 <Update />
                 Just Updated
               </div>
@@ -130,11 +136,11 @@ function App() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={"cardCategory"}>Followers</p>
-              <h3 className={"cardTitle"}>+245</h3>
+              <p className={classes.cardCategory}>Followers</p>
+              <h3 className={classes.cardTitle}>+245</h3>
             </CardHeader>
             <CardFooter stats>
-              <div className={"stats"}>
+              <div className={classes.stats}>
                 <Update />
                 Just Updated
               </div>
@@ -147,11 +153,11 @@ function App() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={"cardCategory"}>Followers</p>
-              <h3 className={"cardTitle"}>+245</h3>
+              <p className={classes.cardCategory}>Followers</p>
+              <h3 className={classes.cardTitle}>+245</h3>
             </CardHeader>
             <CardFooter stats>
-              <div className={"stats"}>
+              <div className={classes.stats}>
                 <Update />
                 Just Updated
               </div>
@@ -204,8 +210,8 @@ function App() {
         <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="warning">
-              <h4 className={"cardTitleWhite"}>Employees Stats</h4>
-              <p className={"cardCategoryWhite"}>
+              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+              <p className={classes.cardCategoryWhite}>
                 New employees on 15th September, 2016
               </p>
             </CardHeader>
