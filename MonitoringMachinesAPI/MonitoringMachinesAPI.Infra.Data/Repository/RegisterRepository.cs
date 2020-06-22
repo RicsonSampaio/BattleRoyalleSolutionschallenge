@@ -57,7 +57,7 @@ namespace MonitoringMachinesAPI.Infra.Data.Repository
         {
             var HardDrives = new List<HardDrive>();
 
-            DriveInfo[] drives = DriveInfo.GetDrives();
+            var drives = DriveInfo.GetDrives();
 
             foreach (var drive in drives)
             {

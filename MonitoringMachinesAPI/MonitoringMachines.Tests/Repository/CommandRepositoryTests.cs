@@ -1,4 +1,7 @@
 ﻿using MonitoringMachinesAPI.Domain.Interfaces.Repositories;
+using MonitoringMachinesAPI.Domain.Models;
+using MonitoringMachinesAPI.Infra.Data.Context;
+using MonitoringMachinesAPI.Infra.Data.Repository;
 using NSubstitute;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -14,51 +17,34 @@ namespace Easynvest.Orders.Fixedincome.Test.Application.Query.Handlers
         [SetUp]
         public void SetUp()
         {
-            _commandRepository = Substitute.For<ICommandRepository>();
+            _commandRepository = new CommandRepository();
         }
 
         [Test]
-        public void Should_Valid_Command()
+        public void Should_Return_Valid_CommandResult_When_Valid_CMD_Command()
         {
+            var command = new Command { CMDCommand = "ping www.google.com", MachineId = 1 };
+            var commandResult = _commandRepository.ExecuteCommand(command);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.IsNotNull(commandResult);
+                StringAssert.Contains("Pinging www.google.com", commandResult);
+            });
+        }
 
-            //_commandRepository.ExecuteCommand();
+        // TODO
+        [Test]
+        public void Should_Return_Empty_When_Invalid_CMD_Command()
+        {
+            var command = new Command { CMDCommand = "teste", MachineId = 1 };
+            var commandResult = _commandRepository.ExecuteCommand(command);
 
             Assert.Multiple(() =>
             {
-                Assert.IsNotNull(0);
-                Assert.IsTrue(true);
+                Assert.IsNotNull(commandResult);
+                StringAssert.Contains("teste", commandResult);
             });
-            //CreateArrange(new List<WithdrawalValidationType>());
-
-            //var request = new BuyValidationQuery<bool>(CUSTOMER_ID);
-            //var result = _sut.Handle(request, CancellationToken.None).Result;
-
-            //Assert.Multiple(() =>
-            //{
-            //    Assert.IsTrue(result.IsSuccess);
-            //    Assert.IsEmpty(result.Messages);
-            //});
         }
-
-        [Test]
-        public void Should_Return_When_Machine_isnull()
-        {
-            //CreateArrange(new List<WithdrawalValidationType>() { WithdrawalValidationType.InSettlement });
-
-            //var request = new BuyValidationQuery<bool>(CUSTOMER_ID);
-            //var result = _sut.Handle(request, CancellationToken.None).Result;
-
-            //Assert.IsFalse(result.Value);
-        }
-
-        [Test]
-        public void Should_Return_When_Machine_IsDown()
-        {
-            //foreach (var validation in WithdrawalValidationType.List())
-            //{
-            //    ExecuteValidation(validation);
-            //}
-        }
-
     }
 }

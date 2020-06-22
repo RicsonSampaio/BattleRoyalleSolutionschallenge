@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MonitoringMachinesAPI.Domain\MonitoringMachinesAPI.Domain.csproj" />
+    <ProjectReference Include="..\MonitoringMachinesAPI.Infra.Data\MonitoringMachinesAPI.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>
