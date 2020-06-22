@@ -19,30 +19,33 @@ namespace MonitoringMachinesAPI.Infra.Data.Repository
 
         public IEnumerable<Machine> GetAllMachines()
         {
-            Log.Information("GetAllMachinesService");
             try
             {
-                return _context.Machines
-                .Include(x => x.Antivirus)
-                .Include(x => x.HardDrive)
-                .ToList();
+                return _context.Machines.Include(a => a.Antivirus).Include(h => h.HardDrive).ToList();
             }
             catch (Exception ex)
             {
-                Log.Information("GetAllMachinesService");
+                Log.Information($"GetAllMachines Repository Exception {ex.Message} {ex.InnerException.Message}");
                 throw;
             }
-            
         }
 
         public void ToggleMachine(int machineId)
         {
-            var machine = _context.Machines.FirstOrDefault(m => m.Id == machineId);
-
-            if (machine != null)
+            try
             {
-                machine.IsUp = !machine.IsUp;
-                _context.SaveChanges();
+                var machine = _context.Machines.FirstOrDefault(m => m.Id == machineId);
+                if (machine != null)
+                {
+                    machine.IsUp = !machine.IsUp;
+                    Log.Information($"Maquina de id {machine.Id} agora está {machine.IsUp}");
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Information($"GetAllMachines Repository Exception {ex.Message} {ex.InnerException.Message}");
+                throw;
             }
         }
     }

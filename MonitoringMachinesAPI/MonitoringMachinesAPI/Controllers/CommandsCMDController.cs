@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MonitoringMachinesAPI.Domain.Interfaces;
 using MonitoringMachinesAPI.Domain.Models;
+using Serilog;
 
 namespace MonitoringMachinesAPI.Controllers
 {
@@ -21,17 +18,19 @@ namespace MonitoringMachinesAPI.Controllers
 
         [HttpPost]
         [Route("command-cmd")]
-        // lembrar de validar se a maquina ta ligada 
+        // TODO lembrar de validar se a maquina ta ligada 
         public IActionResult ExecuteCommand(Command command) 
         {
-            var response = _commandService.ExecuteCommand(command);
-
-            if (response == null)
+            try
             {
-                return BadRequest("Error. Check what you're sending");
+                var response = _commandService.ExecuteCommand(command);
+                return Ok(response);
             }
-
-            return Ok(response);
+            catch (Exception ex)
+            {
+                Log.Information($"ExecuteCommand Exception {ex.Message} {ex.InnerException.Message}");
+                return BadRequest();
+            }
         }
     }
 }

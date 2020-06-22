@@ -1,12 +1,10 @@
 ﻿using System;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MonitoringMachinesAPI.Domain.Interfaces;
 using Serilog;
 
 namespace MonitoringMachinesAPI.Controllers
 {
-    [EnableCors("MyPolicy")]
     [Route("monitoring-machines")]
     [ApiController]
     public partial class MonitoringMachinesController : ControllerBase
@@ -15,25 +13,24 @@ namespace MonitoringMachinesAPI.Controllers
         private readonly IRegisterService _registerService;
         public MonitoringMachinesController(IRegisterService registerService, IMachineService machineService)
         {
-            Log.Information("MonitoringMachinesController construtor");
             _registerService = registerService;
             _machineService = machineService;
         }
 
-        [EnableCors("MyPolicy")]
         [HttpGet]
         [Route("getAll")]
         public IActionResult GetAllMachines() 
         {
-            Log.Information("GetAllMachines");
-            var response = _machineService.GetAllMachines();
-
-            if (response == null)
+            try
             {
-                return BadRequest("Error. Check what you're sending");
+                var response = _machineService.GetAllMachines();
+                return Ok(response);
             }
-
-            return Ok(response);
+            catch (Exception ex)
+            {
+                Log.Information($"GetAllMachines Exception {ex.Message} {ex.InnerException.Message}");
+                return BadRequest();
+            }
         }
 
         [HttpPost]
@@ -47,8 +44,9 @@ namespace MonitoringMachinesAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Error " + ex);
-            }            
+                Log.Information($"toggleMachine Exception {ex.Message} {ex.InnerException.Message}");
+                return BadRequest();
+            }        
         }
     }
 }

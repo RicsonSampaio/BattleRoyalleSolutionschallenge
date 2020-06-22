@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MonitoringMachinesAPI.Domain.Interfaces.Repositories;
+﻿using MonitoringMachinesAPI.Domain.Interfaces.Repositories;
 using MonitoringMachinesAPI.Domain.Models;
 using MonitoringMachinesAPI.Infra.Data.Context;
+using Serilog;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -70,46 +69,73 @@ namespace MonitoringMachinesAPI.Infra.Data.Repository
 
         public Machine RegisterLocalMachine()
         {
-            var machineName = GetMachineName();
-            var machine = _context.Machines.FirstOrDefault(m => m.Name == machineName);
-            if (machine == null)
+            try
             {
-                var localMachine = Machine.Create(GetMachineName(), GetIpAddress(), GetAntivirus(), GetOSVersion(), GetRuntimeInstalledVersion(), true, GetHardDrives());
-                var response = _context.Machines.Add(localMachine);
-                _context.SaveChanges();
-                return response.Entity;
+                var machineName = GetMachineName();
+                var machine = _context.Machines.FirstOrDefault(m => m.Name == machineName);
+                if (machine == null)
+                {
+                    var localMachine = Machine.Create(GetMachineName(), GetIpAddress(), GetAntivirus(), GetOSVersion(), GetRuntimeInstalledVersion(), true, GetHardDrives());
+                    var response = _context.Machines.Add(localMachine);
+                    _context.SaveChanges();
+                    Log.Information($"Local Machine created: Id: {response.Entity.Id} Name: {response.Entity.Name}");
+                    return response.Entity;
+                }
+                else
+                {
+                    return Machine.DefaultEntity();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return Machine.DefaultEntity();
+                Log.Information($"RegisterLocalMachine Repository Exception {ex.Message} {ex.InnerException.Message}");
+                throw;
             }
         }
 
         public Machine RegisterNewMachine()
         {
-            var HardDrives = new List<HardDrive>();
-            HardDrives.Add(HardDrive.Create("randomDriveName1", 100000, 1000000));
-            HardDrives.Add(HardDrive.Create("randomDriveName2", 100000, 1000000));
+            try
+            {
+                var HardDrives = new List<HardDrive>();
+                HardDrives.Add(HardDrive.Create("C:/", 1000000, 10000000));
+                HardDrives.Add(HardDrive.Create("E:/", 1000000, 10000000));
 
-            var randomMachine = Machine.Create("RandomMachineName","xxx.x.x.x", Antivirus.Create("AvastXPTO", false), GetOSVersion(), GetRuntimeInstalledVersion(), true , HardDrives);
-            var response = _context.Machines.Add(randomMachine);
-            _context.SaveChanges();
-            return response.Entity;
+                var randomMachine = Machine.Create("Random-Machine-Name", "192.0.2.235", Antivirus.Create("Avast-XPTO", false), GetOSVersion(), GetRuntimeInstalledVersion(), true, HardDrives);
+                var response = _context.Machines.Add(randomMachine);
+                _context.SaveChanges();
+                Log.Information($"Machine created: Id: {response.Entity.Id} Name: {response.Entity.Name}");
+                return response.Entity;
+            }
+            catch (Exception ex)
+            {
+                Log.Information($"RegisterNewMachine Repository Exception {ex.Message} {ex.InnerException.Message}");
+                throw;
+            }
         }
 
         public Machine DeleteMachineRegistered(int machineId)
         {
-            var machine = _context.Machines.FirstOrDefault(m => m.Id == machineId);
-            if (machine != null)
+            try
             {
-                _context.Machines.Remove(machine);
-                _context.SaveChanges();
-                return machine;
+                var machine = _context.Machines.FirstOrDefault(m => m.Id == machineId);
+                if (machine != null)
+                {
+                    _context.Machines.Remove(machine);
+                    _context.SaveChanges();
+                    Log.Information($"Deleted Machine: Id: {machine.Id} Name: {machine.Name}");
+                    return machine;
+                }
+                else
+                {
+                    return Machine.DefaultEntity();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return Machine.DefaultEntity();
-            }
+                Log.Information($"DeleteMachineRegistered Repository Exception {ex.Message} {ex.InnerException.Message}");
+                throw;
+            } 
         }
     }
 }

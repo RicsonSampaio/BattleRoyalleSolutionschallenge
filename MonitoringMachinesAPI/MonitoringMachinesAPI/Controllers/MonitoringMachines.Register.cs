@@ -10,53 +10,48 @@ namespace MonitoringMachinesAPI.Controllers
         [Route("registerLocalMachine")]
         public IActionResult RegisterLocalMachine()
         {
-            var response = _registerService.RegisterLocalMachine();
-
-            if (response == null)
+            try
             {
-                return BadRequest("Error.");
+                var response = _registerService.RegisterLocalMachine();
+                return Ok(response);
             }
-
-            return Ok(response);
+            catch (Exception ex)
+            {
+                Log.Information($"registerLocalMachine Exception {ex.Message} {ex.InnerException.Message}");
+                return BadRequest();
+            }
         }
 
         [HttpPost]
         [Route("registerNewMachine")]
         public IActionResult RegisterNewMachine()  
         {
-            Log.Information("RegisterNewMachine");
-
             try
             {
                 var response = _registerService.RegisterNewMachine();
-
-                if (response == null)
-                {
-                    return BadRequest("Error. Check what you're sending");
-                }
-
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                Log.Information("RegisterNewMachine Exception " + ex.Message + " " + ex.InnerException.Message);
-                throw;
-            }
-           
+                Log.Information($"RegisterNewMachine Exception {ex.Message} {ex.InnerException.Message}");
+                return BadRequest();
+            }  
         }
 
         [HttpPost]
         [Route("DeleteMachineRegistered/{machineId}")]
         public IActionResult DeleteMachineRegistered(int machineId) 
         {
-            var response = _registerService.DeleteMachineRegistered(machineId);
-
-            if (response == null)
+            try
             {
-                return BadRequest("Error. Check what you're sending");
+                var response = _registerService.DeleteMachineRegistered(machineId);
+                return Ok(response);
             }
-
-            return Ok(response);
+            catch (Exception ex)
+            {
+                Log.Information($"DeleteMachineRegistered Exception {ex.Message} {ex.InnerException.Message}");
+                return BadRequest();
+            }
         }
     }
 }

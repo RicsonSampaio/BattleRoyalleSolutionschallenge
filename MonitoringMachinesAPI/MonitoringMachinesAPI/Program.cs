@@ -45,12 +45,9 @@ namespace MonitoringMachinesAPI
             var isDevelopment = environment == Environments.Development;
             if (isDevelopment)
             {
-                Log.Information("isDevelopment");
                 return Directory.GetCurrentDirectory();
             }
             using var processModule = Process.GetCurrentProcess().MainModule;
-
-            Log.Information("Dentro do GetBasePath" + Path.GetDirectoryName(processModule?.FileName));
             return Path.GetDirectoryName(processModule?.FileName);
         }
 
@@ -58,7 +55,6 @@ namespace MonitoringMachinesAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    Log.Information("getbasepath VALUE" + GetBasePath());
                     config.SetBasePath(GetBasePath());
                     config.AddJsonFile("appsettings.json", optional: false);
                 })

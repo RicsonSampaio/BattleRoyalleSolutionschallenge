@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MonitoringMachinesAPI.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MonitoringMachinesAPI.Infra.Data.Mappers
 {

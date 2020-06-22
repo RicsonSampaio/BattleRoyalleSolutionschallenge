@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +9,6 @@ using MonitoringMachinesAPI.Domain.Interfaces.Repositories;
 using MonitoringMachinesAPI.Domain.Services;
 using MonitoringMachinesAPI.Infra.Data.Context;
 using MonitoringMachinesAPI.Infra.Data.Repository;
-using Serilog;
 
 namespace MonitoringMachinesAPI
 {
@@ -26,8 +24,6 @@ namespace MonitoringMachinesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            Log.Information("ConfigureServices");
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -56,8 +52,6 @@ namespace MonitoringMachinesAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Log.Information("Configure");
-
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 scope.ServiceProvider.GetService<DataContext>().Database.Migrate();
@@ -77,9 +71,7 @@ namespace MonitoringMachinesAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
-
-            
+            });            
         }
     }
 }

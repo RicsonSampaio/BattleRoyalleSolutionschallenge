@@ -1,8 +1,6 @@
 ﻿using MonitoringMachinesAPI.Domain.Interfaces;
 using MonitoringMachinesAPI.Domain.Interfaces.Repositories;
 using MonitoringMachinesAPI.Domain.Models;
-using System;
-using System.Threading.Tasks;
 
 namespace MonitoringMachinesAPI.Domain.Services
 {
@@ -21,7 +19,6 @@ namespace MonitoringMachinesAPI.Domain.Services
 
         public Machine RegisterLocalMachine()
         {
-            // verificar se ja nao tem la
             return _registerRepository.RegisterLocalMachine();
         }
 
