@@ -40,7 +40,6 @@ namespace MonitoringMachinesAPI
 
         private static string GetBasePath()
         {
-            Log.Information("GetBasePath");
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var isDevelopment = environment == Environments.Development;
             if (isDevelopment)
