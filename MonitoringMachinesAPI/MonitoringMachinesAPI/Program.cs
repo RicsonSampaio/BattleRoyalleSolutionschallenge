@@ -61,21 +61,6 @@ namespace MonitoringMachinesAPI
                     Log.Information("getbasepath VALUE" + GetBasePath());
                     config.SetBasePath(GetBasePath());
                     config.AddJsonFile("appsettings.json", optional: false);
-
-                    //config.Sources.Clear();
-
-                    //var env = hostingContext.HostingEnvironment;
-
-                    //config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    //      .AddJsonFile($"appsettings.{env.EnvironmentName}.json",
-                    //                     optional: true, reloadOnChange: true);
-
-                    //config.AddEnvironmentVariables();
-
-                    //if (args != null)
-                    //{
-                    //    config.AddCommandLine(args);
-                    //}
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

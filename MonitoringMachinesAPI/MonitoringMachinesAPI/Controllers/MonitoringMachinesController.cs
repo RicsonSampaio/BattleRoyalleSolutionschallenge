@@ -1,10 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MonitoringMachinesAPI.Domain.Interfaces;
 using Serilog;
 
 namespace MonitoringMachinesAPI.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("monitoring-machines")]
     [ApiController]
     public partial class MonitoringMachinesController : ControllerBase
@@ -18,6 +20,7 @@ namespace MonitoringMachinesAPI.Controllers
             _machineService = machineService;
         }
 
+        [EnableCors("MyPolicy")]
         [HttpGet]
         [Route("getAll")]
         public IActionResult GetAllMachines() 
