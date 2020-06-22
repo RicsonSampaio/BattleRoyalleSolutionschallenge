@@ -63,7 +63,7 @@ export default function Dashboard() {
                 ip={machine.address}
                 antiVirusName={machine.antivirus.name}
                 hasAntiVirus={machine.antivirus.hasAntivirus}
-                hds={machine.hardDrive.map(hd => (` [Nome: ${hd.name}, | freeSpace: ${hd.freeSpace}, | usedSpace: ${hd.usedSpace} ] `))}
+                hds={machine.hardDrive.map(hd => (` [Nome: ${hd.name}, | FreeSpace: ${hd.freeSpace}, | TotalSpace: ${hd.usedSpace} ] `))}
                 firewall={machine.antivirus.hasAntivirus}
                 winVersion={machine.osVersion}
                 dotNetVersion={machine.dotNetVersion}
