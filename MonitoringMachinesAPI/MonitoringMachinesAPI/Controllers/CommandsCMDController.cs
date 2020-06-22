@@ -18,7 +18,6 @@ namespace MonitoringMachinesAPI.Controllers
 
         [HttpPost]
         [Route("command-cmd")]
-        // TODO lembrar de validar se a maquina ta ligada 
         public IActionResult ExecuteCommand(Command command) 
         {
             try
