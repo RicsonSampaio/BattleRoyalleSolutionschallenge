@@ -24,7 +24,6 @@ namespace MonitoringMachinesAPI
             {
                 Log.Information("Starting up the service");
                 CreateHostBuilder(args).Build().Run();
-                Log.Information("return main");
                 return;
             } 
             catch (Exception ex)

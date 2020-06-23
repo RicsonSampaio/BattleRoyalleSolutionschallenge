@@ -16,7 +16,6 @@ namespace MonitoringMachinesAPI.Infra.Data.Repository
         {
             _context = context;
         }
-
         public IEnumerable<Machine> GetAllMachines()
         {
             try

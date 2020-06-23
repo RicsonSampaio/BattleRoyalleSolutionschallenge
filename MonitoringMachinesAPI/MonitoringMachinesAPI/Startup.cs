@@ -32,9 +32,11 @@ namespace MonitoringMachinesAPI
             }));
 
             services.AddDbContext<DataContext>();
+
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddScoped<DataContext>();
 
             services.AddScoped<ICommandService, CommandService>();

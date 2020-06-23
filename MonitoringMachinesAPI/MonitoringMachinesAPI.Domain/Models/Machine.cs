@@ -14,10 +14,7 @@ namespace MonitoringMachinesAPI.Domain.Models
             IsUp = isUp;
             HardDrive = hardDrive;
         }
-
-        protected Machine()
-        {
-        }
+        protected Machine(){}
 
         public static Machine DefaultEntity()
         {
