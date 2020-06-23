@@ -26,8 +26,8 @@ const cardStyle = {
     boxShadow: "none"
   },
   cardProfile: {
-    marginTop: "30px",
-    textAlign: "center"
+    marginTop: "20px",
+    textAlign: "left"
   },
   cardChart: {
     "& p": {

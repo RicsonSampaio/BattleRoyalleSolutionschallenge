@@ -17,7 +17,8 @@ import React from "react";
 // import Search from "@material-ui/icons/Search";
 // // core components
 // import CustomInput from "components/CustomInput/CustomInput.js";
-// import Button from "components/CustomButtons/Button.js";
+import Button from "components/CustomButtons/Button.js";
+import axios from 'axios';
 
 // import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
@@ -49,6 +50,9 @@ export default function AdminNavbarLinks() {
   // };
   return (
     <div>
+      <Button onClick={() => { axios.post(`http://localhost:5000/monitoring-machines/registerNewMachine`) }} variant="contained" color="primary">
+        Create new Random Machine
+      </Button>
       {/* <div className={classes.searchWrapper}>
         <CustomInput
           formControlProps={{

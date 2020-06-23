@@ -41,6 +41,7 @@ const switchRoutes = (
 const useStyles = makeStyles(styles);
 
 export default function Admin({ ...rest }) {
+
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -93,6 +94,7 @@ export default function Admin({ ...rest }) {
     };
   }, [mainPanel]);
   return (
+    
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
