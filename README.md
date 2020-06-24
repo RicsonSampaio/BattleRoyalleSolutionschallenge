@@ -18,7 +18,7 @@ In this localhost u should something like this:
 ## How to test it
 
 U should see a very simple card with your local machine information. On the right side, u should see a cmd component.
-To see some cmd code running just type "run [you cmd command]". Example: run ipconfig      run dir     run ping www.google.com
+To see some cmd code running just type "run [you cmd command]". Example: "run ipconfig" or "run dir"  or "run ping www.google.com"
 
 Will be only one machine (Yours). To see some others just for testing purpose click in the button located on the top right of the screen.
 "Create new random machine". After clicked on it, if u refresh your page u should see another card with a new random machine listed. 
